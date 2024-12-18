@@ -6,7 +6,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/neatdev/Deem-Admin/ma
 
 Deem Admin is a modular based admin system that works with legacy chat system or by UI. Due to this Deem only has a select few amount of built in commands, and they are all universal and needed.
 
-# How to add a plugin to situation-RE
+# How to add a command to Deem admin
 
 A folder named "Deem_commands" will be created upon execution.
 To create a plugin you will need to create a new file such as .lua.
