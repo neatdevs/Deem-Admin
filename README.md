@@ -1,7 +1,7 @@
 # Deem Admin
 
 ```lua
-loadstring(game:HttpGet("(https://raw.githubusercontent.com/neatdevs/Deem-Admin/refs/heads/main/admin.lua)"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/neatdevs/Deem-Admin/refs/heads/main/admin.lua"))()
 ```
 
 Deem Admin is a modular based admin system that works with legacy chat system or by UI. Due to this Deem only has a select few amount of built in commands, and they are all universal and needed.
