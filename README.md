@@ -1,4 +1,4 @@
-**## Deem Admin
+## Deem Admin
 
 ```lua
 loadstring(game:HttpGet("(https://raw.githubusercontent.com/neatdevs/Deem-Admin/refs/heads/main/admin.lua)"))()
@@ -32,4 +32,3 @@ Upon execution, a folder named `Deem_commands` will be created. To add a custom 
   
 - **File Access Requirements**:  
   The script requires **read and write file functionality**. If your exploit lacks these features, the script might not function correctly.
-**
