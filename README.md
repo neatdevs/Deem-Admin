@@ -16,12 +16,26 @@ Upon execution, a folder named `Deem_commands` will be created. To add a custom 
 
 1. **Create a File**: Add a new `.lua` file to the `Deem_commands` folder.  
    - Deem Admin treats each `.lua` file as a separate command.
+
 2. **Define Command Logic**: Write the desired functionality inside the file.
-3. **Name the File**: The file's name becomes the command's name.  
-   - Example: A file named `HelloWorld.lua` creates a `HelloWorld` command.  
-4. **Run the Command**:  
+
+4. **Name the File**: The file's name becomes the command's name.  
+   - Example: A file named `HelloWorld.lua` creates a `HelloWorld` command.
+
+5. **Run the Command**:  
    - Type the file name (e.g., `HelloWorld`) in the input to execute it.  
    - Commands are **not case-sensitive** (e.g., `HeLLoWoRLd` will also work).
+
+6. **Always in include the return**
+   - If you do not include the return as the code part of the codde it won't execute and outputs an error.
+
+Example command/plugin for reference:
+
+```lua
+return function(args)
+    print("TestCommand executed with args: " .. args)
+end
+```
 
 ---
 
