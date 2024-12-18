@@ -703,226 +703,264 @@ end
 
 
 Commands = {
-help = function()
-	local helpMessage = "Available Commands:"
-	local i = 1
-	
-	CreateLabel(helpMessage)
+	help = function()
+		local helpMessage = "Available Commands:"
+		local i = 1
+		
+		CreateLabel(helpMessage)
 
-	for commandName in pairs(Commands) do
-		CreateLabel(i .. ") " .. commandName)
-		i += 1
-	end
-
-	sendOutputFeedback(helpMessage)
-end,
-
-getremote = function(...)
-	for i, v in pairs(game:GetDescendants()) do
-		if string.match(v.ClassName, "RemoteEvent") then
-			sendOutputFeedback("\nRemoteEvent found!  \nLocation: " .. v:GetFullName() .. "  \nMethod  FireServer\n")
-		elseif string.match(v.ClassName, "RemoteFunction") then
-			sendOutputFeedback("\nRemoteFunction found! \nLocation: " .. v:GetFullName() .. "  \nMethod | InvokeServer\n")
-		else
-
-		end
-	end
-end,
-
-getremoteevents = function(...)
-	for i, v in pairs(game:GetDescendants()) do
-		if string.match(v.ClassName, "RemoteEvent") then
-			sendOutputFeedback("\nRemoteEvent found!  \nLocation: " .. v:GetFullName() .. "  \nMethod  FireServer\n")
-		else
-
-		end
-	end
-end,
-
-getremotefunctions = function(...)
-	for i, v in pairs(game:GetDescendants()) do
-		if string.match(v.ClassName, "RemoteFunction") then
-			sendOutputFeedback("\nRemoteFunction found! \nLocation: " .. v:GetFullName() .. "  \nMethod | InvokeServer\n")
-		else
-
-		end
-	end
-end,
-
-noclip = function(...)
-	for i, v in pairs(plr.Character:GetChildren()) do
-		if v:IsA("BasePart") then
-			v.CanCollide = false
-		end
-	end
-end,
-
-clip = function(...)
-	for i, v in pairs(plr.Character:GetChildren()) do
-		if v:IsA("BasePart") then
-			v.CanCollide = true
-		end
-	end
-end,
-
-fireclickdetectors = function(...)
-	for i, v in pairs(workspace:GetDescendants()) do
-		if v:IsA("ClickDetector") then
-			fireclickdetector(v)
-		end
-	end
-end,
-
-supportserver = function(...)
-	sendOutputFeedback("discord.gg/su7ycRRJyz\n Server link has been copied to your clipboard.\n")
-	setclipboard("discord.gg/su7ycRRJyz")
-end,
-
-noproximitycooldown = function(...)
-	while task.wait() do
-		game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(fireproximityprompt)
-	end
-end,
-
-spoofmemory = function(...)
-	hookfunction((gcinfo or collectgarbage), function(...)
-		return math.random(200, 350)
-	end)
-
-	local gamemt = getrawmetatable(game)
-
-	setreadonly(gamemt, false)
-
-	local nc = gamemt.__namecall
-
-	gamemt.__namecall = newcclosure(function(...)
-		if getnamecallmethod() == "GetTotalMemoryUsageMb" then
-			return math.random(395, 405)
+		for commandName in pairs(Commands) do
+			CreateLabel(i .. ") " .. commandName)
+			i += 1
 		end
 
-		return nc(...)
-	end)
+		sendOutputFeedback(helpMessage)
+	end,
 
-	hookfunction(game.Stats.GetTotalMemoryUsageMb, function()
-		return math.random(395, 405)
-	end)
+	getremote = function(...)
+		for i, v in pairs(game:GetDescendants()) do
+			if string.match(v.ClassName, "RemoteEvent") then
+				sendOutputFeedback("\nRemoteEvent found!  \nLocation: " .. v:GetFullName() .. "  \nMethod  FireServer\n")
+			elseif string.match(v.ClassName, "RemoteFunction") then
+				sendOutputFeedback("\nRemoteFunction found! \nLocation: " .. v:GetFullName() .. "  \nMethod | InvokeServer\n")
+			else
 
-	sendOutputFeedback("Memory Spoofed!\n")
-end,
-
-tpgui = function(...)
-	Goto.Visible = true
-	
-	local tweenInfo = TweenInfo.new(
-		0.3, -- The time the tween takes to complete
-		Enum.EasingStyle.Sine, -- The tween style.
-		Enum.EasingDirection.Out, -- EasingDirection
-		0, -- How many times you want the tween to repeat. If you make it less than 0 it will repeat forever.
-		false, -- Reverse?
-		0 -- Delay
-	)
-	
-	local tween = Goto:TweenPosition(
-		UDim2.new(1, 179, 0, 0),
-		Enum.EasingDirection.Out,
-		Enum.EasingStyle.Sine,
-		0.3,
-		true
-	)
-	
-	wait(0.3)
-
-	local playerJoined = function(player : Player)
-		local test : TextButton = Instance.new("TextButton")
-
-		test.Name = player.Name
-		test.Parent = Scroll_2
-		test.BackgroundColor3 = Color3.fromRGB(50, 50, 57)
-		test.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		test.Size = UDim2.new(1, -10, 0, 25)
-		test.Font = Enum.Font.SourceSans
-		test.Text = player.DisplayName
-		test.TextColor3 = Color3.fromRGB(255, 255, 255)
-		test.TextScaled = true
-		test.TextSize = 11.000
-		test.TextWrapped = false
-		test.MouseButton1Down:Connect(function(x: number, y: number) -- Detects When Button Is Pressed
-			-- Sets The String Value To The Players Name
-			local mval : StringValue = toTPto -- String Value To Set
-			mval.Value = tostring(test.Name)  -- Setting String Value
-			if not selected then
-				selected = true
-				test.BackgroundColor3 = Color3.fromRGB(87, 87, 99)
-			elseif selected then
-				selected = false
-				test.BackgroundColor3 = Color3.fromRGB(50, 50, 57)
-				mval.Value = ""
 			end
+		end
+	end,
+
+	getremoteevents = function(...)
+		for i, v in pairs(game:GetDescendants()) do
+			if string.match(v.ClassName, "RemoteEvent") then
+				sendOutputFeedback("\nRemoteEvent found!  \nLocation: " .. v:GetFullName() .. "  \nMethod  FireServer\n")
+			else
+
+			end
+		end
+	end,
+
+	getremotefunctions = function(...)
+		for i, v in pairs(game:GetDescendants()) do
+			if string.match(v.ClassName, "RemoteFunction") then
+				sendOutputFeedback("\nRemoteFunction found! \nLocation: " .. v:GetFullName() .. "  \nMethod | InvokeServer\n")
+			else
+
+			end
+		end
+	end,
+
+	noclip = function(...)
+		for i, v in pairs(plr.Character:GetChildren()) do
+			if v:IsA("BasePart") then
+				v.CanCollide = false
+			end
+		end
+	end,
+
+	clip = function(...)
+		for i, v in pairs(plr.Character:GetChildren()) do
+			if v:IsA("BasePart") then
+				v.CanCollide = true
+			end
+		end
+	end,
+
+	fireclickdetectors = function(...)
+		for i, v in pairs(workspace:GetDescendants()) do
+			if v:IsA("ClickDetector") then
+				fireclickdetector(v)
+			end
+		end
+	end,
+
+	supportserver = function(...)
+		sendOutputFeedback("discord.gg/su7ycRRJyz\n Server link has been copied to your clipboard.\n")
+		setclipboard("discord.gg/su7ycRRJyz")
+	end,
+
+	noproximitycooldown = function(...)
+		while task.wait() do
+			game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(fireproximityprompt)
+		end
+	end,
+
+	spoofmemory = function(...)
+		hookfunction((gcinfo or collectgarbage), function(...)
+			return math.random(200, 350)
 		end)
 
-		if test.TextFits == false then
-			test.TextWrapped = true
-		else
+		local gamemt = getrawmetatable(game)
+
+		setreadonly(gamemt, false)
+
+		local nc = gamemt.__namecall
+
+		gamemt.__namecall = newcclosure(function(...)
+			if getnamecallmethod() == "GetTotalMemoryUsageMb" then
+				return math.random(395, 405)
+			end
+
+			return nc(...)
+		end)
+
+		hookfunction(game.Stats.GetTotalMemoryUsageMb, function()
+			return math.random(395, 405)
+		end)
+
+		sendOutputFeedback("Memory Spoofed!\n")
+	end,
+
+	tpgui = function(...)
+		Goto.Visible = true
+		
+		local tweenInfo = TweenInfo.new(
+			0.3, -- The time the tween takes to complete
+			Enum.EasingStyle.Sine, -- The tween style.
+			Enum.EasingDirection.Out, -- EasingDirection
+			0, -- How many times you want the tween to repeat. If you make it less than 0 it will repeat forever.
+			false, -- Reverse?
+			0 -- Delay
+		)
+		
+		local tween = Goto:TweenPosition(
+			UDim2.new(1, 179, 0, 0),
+			Enum.EasingDirection.Out,
+			Enum.EasingStyle.Sine,
+			0.3,
+			true
+		)
+		
+		wait(0.3)
+
+		local playerJoined = function(player : Player)
+			local test : TextButton = Instance.new("TextButton")
+
+			test.Name = player.Name
+			test.Parent = Scroll_2
+			test.BackgroundColor3 = Color3.fromRGB(50, 50, 57)
+			test.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			test.Size = UDim2.new(1, -10, 0, 25)
+			test.Font = Enum.Font.SourceSans
+			test.Text = player.DisplayName
+			test.TextColor3 = Color3.fromRGB(255, 255, 255)
+			test.TextScaled = true
+			test.TextSize = 11.000
 			test.TextWrapped = false
-		end
-	end
-
-	game:GetService("Players").PlayerAdded:Connect(playerJoined)
-
-	for i,player : Player in game:GetService("Players"):GetPlayers() do
-		playerJoined(player)
-	end
-end,
-
-antiafk = function(...)
-	for i, v in pairs(getconnections(Players.LocalPlayer.Idled)) do
-		v:Disable()
-	end
-end,
-
-fullbright = function(...)
-	Lighting.Brightness = 2
-	Lighting.ClockTime = 14
-	Lighting.FogEnd = 100000
-	Lighting.GlobalShadows = false
-	Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
-end,
-
-clear = function(...)
-	for _, child in pairs(Scroll:GetChildren()) do
-		child:Destroy()
-	end
-	Scroll.CanvasSize = UDim2.new(0, 0, 0, 10)
-end,
-
-saveoutput = function(...)
-	if writefileExploit() then
-		if #Scroll:GetChildren() > 0 then
-			CreateLabel("Loading",'Hold on a sec')
-			local placeName = CleanFileName(MarketplaceService:GetProductInfo(PlaceId).Name)
-			local writelogs = '-- Deem Admin Output logs for "'..placeName..'"\n'
-			for _, child in pairs(Scroll:GetChildren()) do
-				writelogs = writelogs..'\n'..child.Text
-			end
-			local writelogsFile = tostring(writelogs)
-			local fileext = 0
-			local function nameFile()
-				local file
-				pcall(function() file = readfile(placeName..' Output Logs ('..fileext..').txt') end)
-				if file then
-					fileext = fileext+1
-					nameFile()
-				else
-					writefileCooldown(placeName..' Output Logs ('..fileext..').txt', writelogsFile)
+			test.MouseButton1Down:Connect(function(x: number, y: number) -- Detects When Button Is Pressed
+				-- Sets The String Value To The Players Name
+				local mval : StringValue = toTPto -- String Value To Set
+				mval.Value = tostring(test.Name)  -- Setting String Value
+				if not selected then
+					selected = true
+					test.BackgroundColor3 = Color3.fromRGB(87, 87, 99)
+				elseif selected then
+					selected = false
+					test.BackgroundColor3 = Color3.fromRGB(50, 50, 57)
+					mval.Value = ""
 				end
+			end)
+
+			if test.TextFits == false then
+				test.TextWrapped = true
+			else
+				test.TextWrapped = false
 			end
-			nameFile()
-			CreateLabel('Output Logs','Saved Output logs to the workspace folder within your exploit folder.')
 		end
-	else
-		CreateLabel('Output Logs','Your exploit does not support write file. You cannot save chat logs.')
-	end
-end,
+
+		game:GetService("Players").PlayerAdded:Connect(playerJoined)
+
+		for i,player : Player in game:GetService("Players"):GetPlayers() do
+			playerJoined(player)
+		end
+	end,
+
+	antiafk = function(...)
+		for i, v in pairs(getconnections(Players.LocalPlayer.Idled)) do
+			v:Disable()
+		end
+	end,
+
+	fullbright = function(...)
+		Lighting.Brightness = 2
+		Lighting.ClockTime = 14
+		Lighting.FogEnd = 100000
+		Lighting.GlobalShadows = false
+		Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+	end,
+
+	clear = function(...)
+		for _, child in pairs(Scroll:GetChildren()) do
+			child:Destroy()
+		end
+		Scroll.CanvasSize = UDim2.new(0, 0, 0, 10)
+	end,
+
+	saveoutput = function(...)
+		if writefileExploit() then
+			if #Scroll:GetChildren() > 0 then
+				CreateLabel("Loading",'Hold on a sec')
+				local placeName = CleanFileName(MarketplaceService:GetProductInfo(PlaceId).Name)
+				local writelogs = '-- Deem Admin Output logs for "'..placeName..'"\n'
+				for _, child in pairs(Scroll:GetChildren()) do
+					writelogs = writelogs..'\n'..child.Text
+				end
+				local writelogsFile = tostring(writelogs)
+				local fileext = 0
+				local function nameFile()
+					local file
+					pcall(function() file = readfile(placeName..' Output Logs ('..fileext..').txt') end)
+					if file then
+						fileext = fileext+1
+						nameFile()
+					else
+						writefileCooldown(placeName..' Output Logs ('..fileext..').txt', writelogsFile)
+					end
+				end
+				nameFile()
+				CreateLabel('Output Logs','Saved Output logs to the workspace folder within your exploit folder.')
+			end
+		else
+			CreateLabel('Output Logs','Your exploit does not support write file. You cannot save chat logs.')
+		end
+	end,
+
+	serverhop = function(...)
+		local x = {}
+		local pid = game.PlaceId
+		local jid = game.JobId
+
+		for _, v in ipairs(HttpService:JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. pid .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
+			if type(v) == "table" and v.maxPlayers > v.playing and v.id ~= jid then
+				x[#x + 1] = v.id
+			end
+		end
+
+		if #x > 0 then
+			TeleportService:TeleportToPlaceInstance(pid, x[math.random(1, #x)])
+		end
+	end, 
+	
+	rejoin = function(...)
+		TeleportService:Teleport(game.PlaceId, game.Players.LocalPlayer)
+	end,
+	
+	walkspeed = function(...)
+		local args = {...}
+		local ws = args[1]
+
+		Humanoid.WalkSpeed = ws
+	end,
+	
+	jumppower = function(...)
+		local args = {...}
+		local jp = args[1]
+
+		Humanoid.JumpPower = jp
+	end,
+	
+	getpos = function(...)
+		sendOutputFeedback(tostring(HumanoidRootPart.Position.X .. ", " .. HumanoidRootPart.Position.Y .. ", " .. HumanoidRootPart.Position.Z))
+	end, 
 }
 
 -- Chat Command Runner
