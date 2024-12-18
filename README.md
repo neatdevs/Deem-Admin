@@ -1,19 +1,35 @@
-# Deem Admin
+**### Deem Admin
 
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/neatdevs/Deem-Admin/refs/heads/main/admin.lua"))()
+loadstring(game:HttpGet("(https://raw.githubusercontent.com/neatdevs/Deem-Admin/refs/heads/main/admin.lua)"))()
 ```
 
-Deem Admin is a modular based admin system that works with legacy chat system or by UI. Due to this Deem only has a select few amount of built in commands, and they are all universal and needed.
+---
 
-# How to add a command to Deem admin
+Deem Admin is a modular admin system compatible with the legacy chat system or UI. It includes only essential universal commands by default.
 
-A folder named "Deem_commands" will be created upon execution.
-To create a plugin you will need to create a new file such as .lua.
-Deem admin will treat every lua file within the folder as a function, whatever is inside the file is what is gets ran whenever you execute the command.
-The name of the file will be what the command is called for example if the file is named HelloWorld.lua or HelloWorld.txt to run the command you would type HelloWorld in the input, commands are not case sensitive therefore you could also type HeLLoWoRLd and the command would still run.
+---
 
-# Note.
+### Adding Commands to Deem Admin
 
-Deem Admin has only been tested on the windows executor called "Sirhurt", some exploits may not be support but most will.
-Deem Admin also requires read & write file functionality for full support if you're exploit doesn't support said functions the script may not work as intended.
+Upon execution, a folder named `Deem_commands` will be created. To add a custom command:
+
+1. **Create a File**: Add a new `.lua` file to the `Deem_commands` folder.  
+   - Deem Admin treats each `.lua` file as a separate command.
+2. **Define Command Logic**: Write the desired functionality inside the file.
+3. **Name the File**: The file's name becomes the command's name.  
+   - Example: A file named `HelloWorld.lua` creates a `HelloWorld` command.  
+4. **Run the Command**:  
+   - Type the file name (e.g., `HelloWorld`) in the input to execute it.  
+   - Commands are **not case-sensitive** (e.g., `HeLLoWoRLd` will also work).
+
+---
+
+### Notes
+
+- **Compatibility**:  
+  Deem Admin has been tested with the Windows executor *SirHurt*. While most exploits should work, some may not be fully supported.
+  
+- **File Access Requirements**:  
+  The script requires **read and write file functionality**. If your exploit lacks these features, the script might not function correctly.
+**
