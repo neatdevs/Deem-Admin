@@ -4,6 +4,10 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/neatdevs/Deem-Admin/refs/heads/main/admin.lua"))()
 ```
 
+**Update notication/changelogs**
+  If you want to be updated every time Deem Admin updates then please be sure to join our discord as it's our main way of getting the lastest news from the team at Deem
+  The link can be found here: discord.gg/su7ycRRJyz
+
 ---
 
 Deem Admin is a modular admin system compatible with the legacy chat system or UI. It includes only essential universal commands by default.
