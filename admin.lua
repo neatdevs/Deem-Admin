@@ -3,9 +3,6 @@ if not game:IsLoaded() then
 	game.Loaded:Wait()
 end
 
--- Checks if the executor is supported
-assert(fireproximityprompt, "Your exploit is not supported!")
-
 local writefile = type(writefile) == "function" and function(file, data, safe)
 	if safe == true then return pcall(writefile, file, data) end
 	writefile(file, data)
