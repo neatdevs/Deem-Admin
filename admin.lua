@@ -507,6 +507,10 @@ game.Players.PlayerRemoving:Connect(function(plr) -- Player leaves
 	removeplr(plr.Name)
 end)
 
+function getRoot(char)
+	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
+	return rootPart
+end
 
 --// Drag Function \\--
 
@@ -650,9 +654,9 @@ local function sendOutputFeedback(message)
 	CreateLabel("[Deem Admin]: " .. message)
 end
 
-sendChatFeedback("Welcome to Deem Admin (Beta)!\nType ';help' in the chat for a list of commands.")
+sendChatFeedback("Welcome to Deem Admin (Beta)!\nType ';help' in the chat for a list of ")
 
-sendOutputFeedback("Welcome to Deem Admin (Beta)!\nType 'help' in the command bar for a list of commands.")
+sendOutputFeedback("Welcome to Deem Admin (Beta)!\nType 'help' in the command bar for a list of ")
 
 local function split(str, sep)
 	if str == nil then
@@ -673,19 +677,33 @@ local function loadCommands()
 		makefolder(CommandsDirectory)
 	end
 
-	for _, filePath in ipairs(listfiles(CommandsDirectory)) do
-		if filePath:match("%.lua$") or filePath:match("%.txt$") then
-			local commandName = filePath:match("([^/\\]+)%.%w+$")
-			local commandFunction = loadstring(readfile(filePath))
+	local files = listfiles(CommandsDirectory)
 
-			if commandFunction then
-				Commands[commandName] = commandFunction
+	for _, filePath in ipairs(files) do
+		local fileName = filePath:match("[^\\^/]+%.lua$") or filePath:match("[^\\^/]+%.txt$")
+
+		if fileName then
+			local commandName = fileName:sub(1, #fileName - 4)
+			local fileContent = readfile(filePath)
+
+			local call, err = loadstring(fileContent)
+			if not call then
+				warn("Failed to load command:", filePath, "Error:", err)
+			else
+				local success, commandFunction = pcall(call)
+				if success and type(commandFunction) == "function" then
+					Commands[commandName] = commandFunction
+				else
+					warn("Command script must return a function:", filePath)
+				end
 			end
 		end
 	end
 end
 
-Commands.help = function()
+
+Commands = {
+help = function()
 	local helpMessage = "Available Commands:"
 	local i = 1
 	
@@ -697,9 +715,9 @@ Commands.help = function()
 	end
 
 	sendOutputFeedback(helpMessage)
-end
+end,
 
-Commands.getremote = function(...)
+getremote = function(...)
 	for i, v in pairs(game:GetDescendants()) do
 		if string.match(v.ClassName, "RemoteEvent") then
 			sendOutputFeedback("\nRemoteEvent found!  \nLocation: " .. v:GetFullName() .. "  \nMethod  FireServer\n")
@@ -709,9 +727,9 @@ Commands.getremote = function(...)
 
 		end
 	end
-end
+end,
 
-Commands.getremoteevents = function(...)
+getremoteevents = function(...)
 	for i, v in pairs(game:GetDescendants()) do
 		if string.match(v.ClassName, "RemoteEvent") then
 			sendOutputFeedback("\nRemoteEvent found!  \nLocation: " .. v:GetFullName() .. "  \nMethod  FireServer\n")
@@ -719,9 +737,9 @@ Commands.getremoteevents = function(...)
 
 		end
 	end
-end
+end,
 
-Commands.getremotefunctions = function(...)
+getremotefunctions = function(...)
 	for i, v in pairs(game:GetDescendants()) do
 		if string.match(v.ClassName, "RemoteFunction") then
 			sendOutputFeedback("\nRemoteFunction found! \nLocation: " .. v:GetFullName() .. "  \nMethod | InvokeServer\n")
@@ -729,44 +747,44 @@ Commands.getremotefunctions = function(...)
 
 		end
 	end
-end
+end,
 
-Commands.noclip = function(...)
+noclip = function(...)
 	for i, v in pairs(plr.Character:GetChildren()) do
 		if v:IsA("BasePart") then
 			v.CanCollide = false
 		end
 	end
-end
+end,
 
-Commands.clip = function(...)
+clip = function(...)
 	for i, v in pairs(plr.Character:GetChildren()) do
 		if v:IsA("BasePart") then
 			v.CanCollide = true
 		end
 	end
-end
+end,
 
-Commands.fireclickdetectors = function(...)
+fireclickdetectors = function(...)
 	for i, v in pairs(workspace:GetDescendants()) do
 		if v:IsA("ClickDetector") then
 			fireclickdetector(v)
 		end
 	end
-end
+end,
 
-Commands.supportserver = function(...)
+supportserver = function(...)
 	sendOutputFeedback("discord.gg/su7ycRRJyz\n Server link has been copied to your clipboard.\n")
 	setclipboard("discord.gg/su7ycRRJyz")
-end
+end,
 
-Commands.noproximitycooldown = function(...)
+noproximitycooldown = function(...)
 	while task.wait() do
 		game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(fireproximityprompt)
 	end
-end
+end,
 
-Commands.spoofmemory = function(...)
+spoofmemory = function(...)
 	hookfunction((gcinfo or collectgarbage), function(...)
 		return math.random(200, 350)
 	end)
@@ -790,14 +808,9 @@ Commands.spoofmemory = function(...)
 	end)
 
 	sendOutputFeedback("Memory Spoofed!\n")
-end
+end,
 
-function getRoot(char)
-	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
-	return rootPart
-end
-
-Commands.tpgui = function(...)
+tpgui = function(...)
 	Goto.Visible = true
 	
 	local tweenInfo = TweenInfo.new(
@@ -859,36 +872,30 @@ Commands.tpgui = function(...)
 	for i,player : Player in game:GetService("Players"):GetPlayers() do
 		playerJoined(player)
 	end
-end
+end,
 
-Commands.antiafk = function(...)
+antiafk = function(...)
 	for i, v in pairs(getconnections(Players.LocalPlayer.Idled)) do
 		v:Disable()
 	end
-end
+end,
 
-Commands.fullbright = function(...)
+fullbright = function(...)
 	Lighting.Brightness = 2
 	Lighting.ClockTime = 14
 	Lighting.FogEnd = 100000
 	Lighting.GlobalShadows = false
 	Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
-end
+end,
 
-Commands.noproximitycooldown = function(...)
-	while task.wait() do
-		game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(fireproximityprompt)
-	end
-end
-
-Commands.clear = function(...)
+clear = function(...)
 	for _, child in pairs(Scroll:GetChildren()) do
 		child:Destroy()
 	end
 	Scroll.CanvasSize = UDim2.new(0, 0, 0, 10)
-end
+end,
 
-Commands.saveoutput = function(...)
+saveoutput = function(...)
 	if writefileExploit() then
 		if #Scroll:GetChildren() > 0 then
 			CreateLabel("Loading",'Hold on a sec')
@@ -915,7 +922,8 @@ Commands.saveoutput = function(...)
 	else
 		CreateLabel('Output Logs','Your exploit does not support write file. You cannot save chat logs.')
 	end
-end
+end,
+}
 
 -- Chat Command Runner
 local function processChatMessage(message)
