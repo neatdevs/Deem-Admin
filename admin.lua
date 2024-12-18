@@ -684,7 +684,7 @@ Commands.help = function()
 	sendOutputFeedback(helpMessage)
 end
 
-Commands.getremote = function(...)
+Commands.getremotes = function(...)
 	for i, v in pairs(game:GetDescendants()) do
 		if string.match(v.ClassName, "RemoteEvent") then
 			sendOutputFeedback("\nRemoteEvent found!  \nLocation: " .. v:GetFullName() .. "  \nMethod  FireServer\n")
