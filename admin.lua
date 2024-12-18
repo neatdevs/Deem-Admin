@@ -3,6 +3,9 @@ if not game:IsLoaded() then
 	game.Loaded:Wait()
 end
 
+-- Checks if the executor is supported
+assert(fireproximityprompt, "Your exploit is not supported!")
+
 local writefile = type(writefile) == "function" and function(file, data, safe)
 	if safe == true then return pcall(writefile, file, data) end
 	writefile(file, data)
@@ -26,6 +29,7 @@ function readfileExploit()
 end
 
 -- Locals
+
 local cloneref = cloneref or function(o) return o end
 COREGUI = cloneref(game:GetService("CoreGui"))
 Players = cloneref(game:GetService("Players"))
@@ -226,7 +230,7 @@ Scroll.Position = UDim2.new(0, 5, 0, 5)
 Scroll.Size = UDim2.new(0, 328, 0, 210)
 Scroll.ZIndex = 10
 Scroll.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Scroll.CanvasSize = UDim2.new(0, 0, 0, 10)
+Scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
 Scroll.ScrollBarThickness = 8
 Scroll.TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
 
@@ -444,9 +448,10 @@ Scroll_2.BorderSizePixel = 0
 Scroll_2.Position = UDim2.new(0.5, 0, 0, 5)
 Scroll_2.Size = UDim2.new(1, -10, 1, -40)
 Scroll_2.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Scroll_2.CanvasSize = UDim2.new(0, 0, 5, 0)
+Scroll_2.CanvasSize = UDim2.new(0, 0, 0, 0)
 Scroll_2.ScrollBarThickness = 4
 Scroll_2.TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
+Scroll_2.AutomaticCanvasSize = Enum.AutomaticSize.Y
 
 UIListLayout.Parent = Scroll_2
 UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
@@ -492,6 +497,19 @@ end)
 
 toTPto.Parent = Background_2
 toTPto.Value = ""
+
+function removeplr(plrName)
+	local playertab = Scroll_2
+	local frame = playertab:FindFirstChild(plrName) -- Find Frame
+	if frame ~= nil then -- If Frame
+		frame:Destroy() -- Destroy Frame
+	end
+end
+
+game.Players.PlayerRemoving:Connect(function(plr) -- Player leaves
+	removeplr(plr.Name)
+end)
+
 
 --// Drag Function \\--
 
@@ -684,7 +702,7 @@ Commands.help = function()
 	sendOutputFeedback(helpMessage)
 end
 
-Commands.getremotes = function(...)
+Commands.getremote = function(...)
 	for i, v in pairs(game:GetDescendants()) do
 		if string.match(v.ClassName, "RemoteEvent") then
 			sendOutputFeedback("\nRemoteEvent found!  \nLocation: " .. v:GetFullName() .. "  \nMethod  FireServer\n")
@@ -784,6 +802,7 @@ end
 
 Commands.tpgui = function(...)
 	Goto.Visible = true
+	
 	local tweenInfo = TweenInfo.new(
 		0.3, -- The time the tween takes to complete
 		Enum.EasingStyle.Sine, -- The tween style.
