@@ -547,11 +547,6 @@ game.Players.PlayerRemoving:Connect(function(plr) -- Player leaves
 	removeplr(plr.Name)
 end)
 
-function getRoot(char)
-	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
-	return rootPart
-end
-
 --// Drag Function \\--
 
 function dragGUI(gui)
@@ -694,9 +689,9 @@ local function sendOutputFeedback(message)
 	CreateLabel("[Deem Admin]: " .. message)
 end
 
-sendChatFeedback("Welcome to Deem Admin (Beta)!\nType ';help' in the chat for a list of ")
+sendChatFeedback("Welcome to Deem Admin (Beta)!\nType ';help' in the chat for a list of commands")
 
-sendOutputFeedback("Welcome to Deem Admin (Beta)!\nType 'help' in the command bar for a list of ")
+sendOutputFeedback("Welcome to Deem Admin (Beta)!\nType 'help' in the command bar for a list of commands")
 
 if IsOnMobile then
 	sendOutputFeedback("You are currently on mobile. If Deem Admin doesn't work for you please send your executor and platform to the discord.\nPlease join here to get help: discord.gg/su7ycRRJyz")
