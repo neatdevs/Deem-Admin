@@ -658,6 +658,10 @@ sendChatFeedback("Welcome to Deem Admin (Beta)!\nType ';help' in the chat for a 
 
 sendOutputFeedback("Welcome to Deem Admin (Beta)!\nType 'help' in the command bar for a list of ")
 
+if IsOnMobile then
+	sendOutputFeedback("You are currently on mobile. If Deem Admin doesn't work for you please send your executor and platform to the discord.\nPlease join here to get help: discord.gg/su7ycRRJyz")
+end
+
 local function split(str, sep)
 	if str == nil then
 		return {}
