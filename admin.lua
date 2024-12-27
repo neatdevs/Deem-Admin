@@ -110,47 +110,7 @@ function getRoot(char)
 	return rootPart
 end
 
-SpecialPlayerCases = {
-	["all"] = function(speaker) return Players:GetPlayers() end,
-	["others"] = function(speaker)
-		local plrs = {}
-		for i,v in pairs(Players:GetPlayers()) do
-			if v ~= speaker then
-				table.insert(plrs,v)
-			end
-		end
-		return plrs
-	end,
-	["me"] = function(speaker)return {speaker} end,
-	["#(%d+)"] = function(speaker,args,currentList)
-		local returns = {}
-		local randAmount = tonumber(args[1])
-		local players = {unpack(currentList)}
-		for i = 1,randAmount do
-			if #players == 0 then break end
-			local randIndex = math.random(1,#players)
-			table.insert(returns,players[randIndex])
-			table.remove(players,randIndex)
-		end
-		return returns
-	end,
-	["random"] = function(speaker,args,currentList)
-		local players = Players:GetPlayers()
-		local localplayer = Players.LocalPlayer
-		table.remove(players, table.find(players, localplayer))
-		return {players[math.random(1,#players)]}
-	end,
-	["%%(.+)"] = function(speaker,args)
-		local returns = {}
-		local team = args[1]
-		for _,plr in pairs(Players:GetPlayers()) do
-			if plr.Team and string.sub(string.lower(plr.Team.Name),1,#team) == string.lower(team) then
-				table.insert(returns,plr)
-			end
-		end
-		return returns
-	end,
-}
+SpecialPlayerCases = {}
 
 local function getPlayer(list,plr)
 	if list == nil then return {plr.Name} end
