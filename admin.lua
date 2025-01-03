@@ -155,6 +155,8 @@ local function getPlayer(list,plr)
 	return foundNames
 end
 
+local DA = {}
+
 --// GUI Creation \\--
 
 local ScreenGui = Instance.new("ScreenGui")
@@ -585,7 +587,7 @@ local lastMessage = nil
 local lastLabel = nil
 local dupeCount = 1
 
-function CreateLabel(Output)
+function DA:CreateLabel(Output)
 	if lastMessage == Output then
 		dupeCount = dupeCount+1
 		lastLabel.Text = Time()..' - '..Output..' (x'..dupeCount..')'
