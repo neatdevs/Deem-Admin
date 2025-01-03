@@ -474,21 +474,21 @@ TP.MouseButton1Click:Connect(function()
 	if toTPto.Value ~= "" then
 		local player = toTPto.Value
 		local char = player.Character
-		
+
 		local players = getPlayer(player, plr)
-		
+
 		for i,v in pairs(players) do
 			if Players[v].Character ~= nil then
 				if plr.Character:FindFirstChildOfClass('Humanoid') and plr.Character:FindFirstChildOfClass('Humanoid').SeatPart then
 					plr.Character:FindFirstChildOfClass('Humanoid').Sit = false
 					wait(.1)
 				end
-				
+
 				getRoot(plr.Character).CFrame = getRoot(Players[v].Character).CFrame + Vector3.new(3,1,0)
 			end
 		end
 	elseif toTPto.Value == "" or nil then 
-		return CreateLabel("A player hasn't been selected yet!")
+		return _G.CreateLabel("A player hasn't been selected yet!")
 	end
 end)
 
@@ -585,7 +585,7 @@ local lastMessage = nil
 local lastLabel = nil
 local dupeCount = 1
 
-function CreateLabel(Output)
+_G.CreateLabel = function(Output)
 	if lastMessage == Output then
 		dupeCount = dupeCount+1
 		lastLabel.Text = Time()..' - '..Output..' (x'..dupeCount..')'
@@ -646,7 +646,7 @@ local function sendChatFeedback(message)
 end
 
 local function sendOutputFeedback(message)
-	CreateLabel("[Deem Admin]: " .. message)
+	_G.CreateLabel("[Deem Admin]: " .. message)
 end
 
 sendChatFeedback("Welcome to Deem Admin (Beta)!\nType ';help' in the chat for a list of commands")
@@ -705,11 +705,11 @@ Commands = {
 	help = function()
 		local helpMessage = "Available Commands:"
 		local i = 1
-		
-		CreateLabel(helpMessage)
+
+		_G.CreateLabel(helpMessage)
 
 		for commandName in pairs(Commands) do
-			CreateLabel(i .. ") " .. commandName)
+			_G.CreateLabel(i .. ") " .. commandName)
 			i += 1
 		end
 
@@ -811,7 +811,7 @@ Commands = {
 
 	tpgui = function(...)
 		Goto.Visible = true
-		
+
 		local tweenInfo = TweenInfo.new(
 			0.3, -- The time the tween takes to complete
 			Enum.EasingStyle.Sine, -- The tween style.
@@ -820,7 +820,7 @@ Commands = {
 			false, -- Reverse?
 			0 -- Delay
 		)
-		
+
 		local tween = Goto:TweenPosition(
 			UDim2.new(1, 179, 0, 0),
 			Enum.EasingDirection.Out,
@@ -828,7 +828,7 @@ Commands = {
 			0.3,
 			true
 		)
-		
+
 		wait(0.3)
 
 		local playerJoined = function(player : Player)
@@ -897,7 +897,7 @@ Commands = {
 	saveoutput = function(...)
 		if writefileExploit() then
 			if #Scroll:GetChildren() > 0 then
-				CreateLabel("Loading",'Hold on a sec')
+				_G.CreateLabel("Loading",'Hold on a sec')
 				local placeName = CleanFileName(MarketplaceService:GetProductInfo(PlaceId).Name)
 				local writelogs = '-- Deem Admin Output logs for "'..placeName..'"\n'
 				for _, child in pairs(Scroll:GetChildren()) do
@@ -916,10 +916,10 @@ Commands = {
 					end
 				end
 				nameFile()
-				CreateLabel('Output Logs','Saved Output logs to the workspace folder within your exploit folder.')
+				_G.CreateLabel('Output Logs','Saved Output logs to the workspace folder within your exploit folder.')
 			end
 		else
-			CreateLabel('Output Logs','Your exploit does not support write file. You cannot save chat logs.')
+			_G.CreateLabel('Output Logs','Your exploit does not support write file. You cannot save chat logs.')
 		end
 	end,
 
@@ -938,25 +938,25 @@ Commands = {
 			TeleportService:TeleportToPlaceInstance(pid, x[math.random(1, #x)])
 		end
 	end, 
-	
+
 	rejoin = function(...)
 		TeleportService:Teleport(game.PlaceId, game.Players.LocalPlayer)
 	end,
-	
+
 	walkspeed = function(...)
 		local args = {...}
 		local ws = args[1]
 
 		Humanoid.WalkSpeed = ws
 	end,
-	
+
 	jumppower = function(...)
 		local args = {...}
 		local jp = args[1]
 
 		Humanoid.JumpPower = jp
 	end,
-	
+
 	getpos = function(...)
 		sendOutputFeedback(tostring(HumanoidRootPart.Position.X .. ", " .. HumanoidRootPart.Position.Y .. ", " .. HumanoidRootPart.Position.Z))
 	end, 
@@ -989,12 +989,12 @@ local function processInputCommand(cmd)
 	local args = split(cmd, " ")
 	local commandName = string.lower(args[1])
 	table.remove(args, 1)
-	
+
 	if Commands[commandName] then
 		local success, err = pcall(function()
 			Commands[commandName](table.unpack(args))
 		end)
-		
+
 		if success then
 			sendOutputFeedback("Executed '" .. commandName .. "' successfully!")
 		else
