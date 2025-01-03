@@ -490,7 +490,7 @@ TP.MouseButton1Click:Connect(function()
 			end
 		end
 	elseif toTPto.Value == "" or nil then 
-		return CreateLabel("A player hasn't been selected yet!")
+		return DA:CreateLabel("A player hasn't been selected yet!")
 	end
 end)
 
@@ -648,7 +648,7 @@ local function sendChatFeedback(message)
 end
 
 local function sendOutputFeedback(message)
-	CreateLabel("[Deem Admin]: " .. message)
+	DA:CreateLabel("[Deem Admin]: " .. message)
 end
 
 sendChatFeedback("Welcome to Deem Admin (Beta)!\nType ';help' in the chat for a list of commands")
@@ -708,10 +708,10 @@ Commands = {
 		local helpMessage = "Available Commands:"
 		local i = 1
 		
-		CreateLabel(helpMessage)
+		DA:CreateLabel(helpMessage)
 
 		for commandName in pairs(Commands) do
-			CreateLabel(i .. ") " .. commandName)
+			DA:CreateLabel(i .. ") " .. commandName)
 			i += 1
 		end
 
@@ -899,7 +899,7 @@ Commands = {
 	saveoutput = function(...)
 		if writefileExploit() then
 			if #Scroll:GetChildren() > 0 then
-				CreateLabel("Loading",'Hold on a sec')
+				DA:CreateLabel("Loading",'Hold on a sec')
 				local placeName = CleanFileName(MarketplaceService:GetProductInfo(PlaceId).Name)
 				local writelogs = '-- Deem Admin Output logs for "'..placeName..'"\n'
 				for _, child in pairs(Scroll:GetChildren()) do
@@ -918,10 +918,10 @@ Commands = {
 					end
 				end
 				nameFile()
-				CreateLabel('Output Logs','Saved Output logs to the workspace folder within your exploit folder.')
+				DA:CreateLabel('Output Logs','Saved Output logs to the workspace folder within your exploit folder.')
 			end
 		else
-			CreateLabel('Output Logs','Your exploit does not support write file. You cannot save chat logs.')
+			DA:CreateLabel('Output Logs','Your exploit does not support write file. You cannot save chat logs.')
 		end
 	end,
 
