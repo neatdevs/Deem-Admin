@@ -181,7 +181,7 @@ local UIPadding = Instance.new("UIPadding")
 local Background_2 = Instance.new("Frame")
 local Scroll_2 = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
-local UIPadding_2 = Instance.new("UIPadding")
+local UIPadding_3 = Instance.new("UIPadding")
 local TP = Instance.new("TextButton")
 local toTPto = Instance.new("StringValue")
 
@@ -303,7 +303,7 @@ PopupText.TextSize = 14.000
 PopupText.TextXAlignment = Enum.TextXAlignment.Left
 
 UIPadding_2.Parent = PopupText
-UIPadding_2.PaddingLeft = UDim.new(0, 2)
+UIPadding_2.PaddingLeft = UDim.new(0, 5)
 
 Hide.Name = "Hide"
 Hide.Parent = Shadow
@@ -454,9 +454,9 @@ UIListLayout.Parent = Scroll_2
 UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 UIListLayout.Padding = UDim.new(0, 5)
 
-UIPadding_2.Parent = Scroll_2
-UIPadding_2.PaddingRight = UDim.new(0, 5)
-UIPadding_2.PaddingTop = UDim.new(0, 5)
+UIPadding_3.Parent = Scroll_2
+UIPadding_3.PaddingRight = UDim.new(0, 5)
+UIPadding_3.PaddingTop = UDim.new(0, 5)
 
 TP.Name = "TP"
 TP.Parent = Background_2
