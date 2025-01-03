@@ -155,8 +155,6 @@ local function getPlayer(list,plr)
 	return foundNames
 end
 
-local DA = {}
-
 --// GUI Creation \\--
 
 local ScreenGui = Instance.new("ScreenGui")
@@ -490,7 +488,7 @@ TP.MouseButton1Click:Connect(function()
 			end
 		end
 	elseif toTPto.Value == "" or nil then 
-		return DA:CreateLabel("A player hasn't been selected yet!")
+		return CreateLabel("A player hasn't been selected yet!")
 	end
 end)
 
@@ -587,7 +585,7 @@ local lastMessage = nil
 local lastLabel = nil
 local dupeCount = 1
 
-function DA:CreateLabel(Output)
+function CreateLabel(Output)
 	if lastMessage == Output then
 		dupeCount = dupeCount+1
 		lastLabel.Text = Time()..' - '..Output..' (x'..dupeCount..')'
@@ -648,7 +646,7 @@ local function sendChatFeedback(message)
 end
 
 local function sendOutputFeedback(message)
-	DA:CreateLabel("[Deem Admin]: " .. message)
+	CreateLabel("[Deem Admin]: " .. message)
 end
 
 sendChatFeedback("Welcome to Deem Admin (Beta)!\nType ';help' in the chat for a list of commands")
@@ -708,10 +706,10 @@ Commands = {
 		local helpMessage = "Available Commands:"
 		local i = 1
 		
-		DA:CreateLabel(helpMessage)
+		CreateLabel(helpMessage)
 
 		for commandName in pairs(Commands) do
-			DA:CreateLabel(i .. ") " .. commandName)
+			CreateLabel(i .. ") " .. commandName)
 			i += 1
 		end
 
@@ -899,7 +897,7 @@ Commands = {
 	saveoutput = function(...)
 		if writefileExploit() then
 			if #Scroll:GetChildren() > 0 then
-				DA:CreateLabel("Loading",'Hold on a sec')
+				CreateLabel("Loading",'Hold on a sec')
 				local placeName = CleanFileName(MarketplaceService:GetProductInfo(PlaceId).Name)
 				local writelogs = '-- Deem Admin Output logs for "'..placeName..'"\n'
 				for _, child in pairs(Scroll:GetChildren()) do
@@ -918,10 +916,10 @@ Commands = {
 					end
 				end
 				nameFile()
-				DA:CreateLabel('Output Logs','Saved Output logs to the workspace folder within your exploit folder.')
+				CreateLabel('Output Logs','Saved Output logs to the workspace folder within your exploit folder.')
 			end
 		else
-			DA:CreateLabel('Output Logs','Your exploit does not support write file. You cannot save chat logs.')
+			CreateLabel('Output Logs','Your exploit does not support write file. You cannot save chat logs.')
 		end
 	end,
 
