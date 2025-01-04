@@ -34,6 +34,8 @@ Upon execution, a folder named `Deem_commands` will be created. To add a custom 
 6. **Always in include the return**
    - If you do not include the return as the code part of the codde it won't execute and outputs an error.
 
+PS: If you want to output any text to the console all you need to do is use: _G.CreateLabel.
+
 Example command/plugin for reference:
 
 ```lua
