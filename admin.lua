@@ -27,14 +27,13 @@ end
 
 -- Locals
 
-local cloneref = cloneref or function(o) return o end
-COREGUI = cloneref(game:GetService("CoreGui"))
-Players = cloneref(game:GetService("Players"))
+COREGUI = game:GetService("CoreGui")
+Players = game:GetService("Players")
 
-MarketplaceService = cloneref(game:GetService("MarketplaceService"))
+MarketplaceService = game:GetService("MarketplaceService")
 PlaceId, JobId = game.PlaceId, game.JobId
 
-UserInputService = cloneref(game:GetService("UserInputService"))
+UserInputService = game:GetService("UserInputService")
 
 local IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, UserInputService:GetPlatform())
 
@@ -185,7 +184,7 @@ local UIPadding_3 = Instance.new("UIPadding")
 local TP = Instance.new("TextButton")
 local toTPto = Instance.new("StringValue")
 
-TweenService = cloneref(game:GetService("TweenService"))
+TweenService = game:GetService("TweenService")
 
 ScreenGui.Parent = COREGUI
 
