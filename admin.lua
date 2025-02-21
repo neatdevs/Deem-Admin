@@ -26,8 +26,7 @@ function readfileExploit()
 end
 
 -- Locals
-
-COREGUI = game:GetService("CoreGui")
+coregui = game:GetService("CoreGui")
 Players = game:GetService("Players")
 
 MarketplaceService = game:GetService("MarketplaceService")
@@ -36,6 +35,8 @@ PlaceId, JobId = game.PlaceId, game.JobId
 UserInputService = game:GetService("UserInputService")
 
 local IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, UserInputService:GetPlatform())
+
+queueteleport = queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 
 local plr = Players.LocalPlayer
 
@@ -186,7 +187,7 @@ local toTPto = Instance.new("StringValue")
 
 TweenService = game:GetService("TweenService")
 
-ScreenGui.Parent = COREGUI
+ScreenGui.Parent = gethui() or coregui
 
 Output.Name = "Output"
 Output.Parent = ScreenGui
@@ -504,6 +505,10 @@ end
 
 game.Players.PlayerRemoving:Connect(function(plr) -- Player leaves
 	removeplr(plr.Name)
+end)
+
+plr.OnTeleport:Connect(function()
+    queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/neatdevs/Deem-Admin/refs/heads/main/admin.lua'))()")
 end)
 
 --// Drag Function \\--
