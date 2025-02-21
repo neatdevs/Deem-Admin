@@ -55,4 +55,4 @@ end
   The script requires **read and write file functionality**. If your exploit lacks these features, the script might not function correctly.
 
 - **queue_on_teleport Somewhat Needed**:
-  To properly load the script right after serverhopping or rejoining **queue_on_teleport** is required if you don't want to manually re-execute the script which can be a pain. 
+  To properly load the script right after serverhopping or rejoining **queue_on_teleport** is required if you don't want to manually re-execute the script.
